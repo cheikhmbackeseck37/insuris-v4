@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leave | Docs</title>
+    <style>
+        body{
+            background-color:#fff;
+            font-size: 15px;
+        }
+        .header{
+            text-align: center;
+            font-size: 35px;
+        }
+        .header__info{
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .print_date{
+            font-weight: 500;
+        }
+        .dotted{
+            border-bottom: 1px dotted #333;
+        }
+    </style>
+</head>
+<body style="margin:5rem; font-size:12px;">
+    <div class="header">
+        <center class="logo">
+            <img src="http://gs1kenya.org/assets/images/logo.png" height="61" alt="GS1Kenya">
+        </center>
+        <h2 class="header__info">
+            <span class="header__main" style="font-size: 16px;">LEAVE REQUEST</span><br>
+            <span class="header__sub" style="font-size: 14px;">LEAVE WILL NOT BE APPROVED IF ANY OF THE FIELDS IS MISSING</span>
+        </h2>
+    </div>
+
+    <div class="print_date">Date: <span style="color:#03035a;"> {{ leave.start_date }} </span></div>
+
+    <h2 class="office">
+        <span  class="office__1">Finance & administration Mananger,</span> <br>
+        <span class="office__2">GS1 Kenya,</span><br>
+        <span class="office__3">PO BOX 3243-00200.</span><br>
+    </h2>
+
+    <p class="paragraph">
+        I &nbsp; &nbsp; <strong><span class="dotted" style="color:#03035a;"> {{ user.first_name}} &nbsp; {{ user.last_name}}</span> </strong> &nbsp; &nbsp;(full names)
+        wish to apply for<b> <strong class="value"  style="color:#03035a;"> &nbsp; &nbsp; {{ leave.leave.name }} &nbsp; &nbsp;</strong> </b> for a period of<b> <strong class="value"  style="color:#03035a;"> &nbsp; {{ days }} &nbsp; </strong></b> days.
+        With effect from<b><strong class="value"  style="color:#03035a;"> &nbsp; {{ leave.start_date }}</strong> &nbsp; to &nbsp; <strong style="color:#03035a;"> {{ leave.end_date }} &nbsp;</strong></b>, i shall resume on <b><strong class="value dotted"  style="color:#03035a;">&nbsp; {{ leave.resume_date }} </strong></b>
+    </p>
+    <p>Signature: __________________________ </p
+    <br> <br> <br> <br><br>
+    <div class="work">
+        <p> Work Station/ Department: &nbsp;  &nbsp;  &nbsp;  <strong> <span class="dotted value"  style="color:#03035a;"> {{ employee.position }} </span> </strong> </p>
+        <p> Tel. No while away: &nbsp;  &nbsp;  &nbsp;  <strong> <span class="dotted value" style="color:#03035a;"> 0{{ employee.alt_phone_number }} </span></strong> </p>
+        <p> Person Taking Charge: &nbsp;  &nbsp;  &nbsp;  <strong> <span class="dotted value"  style="color:#03035a;">{{ leave.person_taking_charge.user.first_name}} &nbsp; &nbsp; {{ leave.person_taking_charge.user.last_name}} </span></strong> </p>
+        <p> Person Taking Charge Tel. No: &nbsp;  &nbsp;  &nbsp;  <strong>  <span class="dotted value"  style="color:#03035a;"> {{ leave.person_taking_charge.phone}} </span></strong> </p>
+    </div>
+    <br> <br><br><br><br>
+    <p>Head Of Department: Name: _______________________________________ &nbsp; Signature: __________________________ </p>
+    <p>Human Resource: Name: ___________________________________________ &nbsp; Signature: __________________________ </p
+    <p>General Manager: Name: __________________________________________ &nbsp; Signature: __________________________ </p
+    <br> <br><br><br><br>
+    <div style="border-bottom: 1px dotted #333;">
+    <center style="margin-top:40px">
+        <p  style="color:#03035a;"> &copy; All Rights Reserved by GS1Kenya</p>
+    </center>
+    </div>
+</body>
+</html>

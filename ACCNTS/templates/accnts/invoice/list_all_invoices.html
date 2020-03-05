@@ -1,0 +1,63 @@
+{% extends "layout/accnts_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | PROFOMA INVOICES</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Member Name</th>
+                                <th>Member Number</th>
+                                <th>Category Amount</th>
+                                <th>Balance</th>
+                                <th> Date of Generations</th>
+                                <th style="text-align:center;">VAT</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if invoices%}
+                            {% for invoice in invoices %}
+                            {% if invoice.amount != 0 %}
+                                  <tr>
+                                      <td>{{ invoice.member.company_name }}</td>
+                                      <td>{{ invoice.member.member_number }}</td>
+                                      <td>{{ invoice.member.category }}</td>
+                                      <td>{{ invoice.balance}}</td>
+                                      <td>{{ invoice.date_of_generate }}</td>
+                                      <td style="text-align: center;">
+                                         {% if  invoice.VAT == "Yes"%}
+                                         <span > 16% </span>
+                                         {% else %}
+                                         <span > 0% </span>
+                                         {% endif %}
+                                      </td>
+                                      <td style="text-align:center;"><a href="{% url 'ACCNTS:print_invoice' pk=invoice.id %}" class="btn label bg-orange">print</td>
+                                  </tr>
+                              {% endif %}
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

@@ -1,0 +1,229 @@
+{% extends "homePage/layout.html" %}
+{% load static %}
+{% block content %}
+<div class="header pb-6">
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 d-inline-block mb-0">Alternative</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Alternative</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a href="#" class="btn btn-sm btn-neutral">New</a>
+            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    
+
+    <div class="container">
+    <div class="col-md-12" style="border-bottom: 2px solid #f5f5f5;margin-bottom:20px;">
+     <h3 style="text-align:center;color:#00bcd4;"> Welcome<span style="margin-left: 1rem; border-radius: .4rem; color: #f7613f;;" >  {{ user.first_name }}  {{ user.last_name }}</span></h3>
+     <h5 style="text-align:center;"> Choose your desired action below</h5>
+    </div>
+
+
+    
+
+    <div class="row card-wrapper" >
+       
+       
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+            
+            
+
+
+
+
+
+
+
+
+
+        <div class="col-lg-4">
+
+            <div class="card">
+
+                <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <!-- Avatar -->
+                        <a href="#" class="avatar avatar-xl rounded-circle">
+                        <img alt="Image placeholder" src="/static/assets/img/theme/team-2.jpg">
+                        </a>
+                    </div>
+                    <div class="col ml--2">
+                        <h4 class="mb-0">
+                        <a href="#!">INSURIS</a>
+                        </h4>
+                        <p class="text-sm text-muted mb-0">ADMIN</p>
+                        <span class="text-success">●</span>
+                        <small>Active</small>
+                    </div>
+                    <div class="col-auto">
+                    
+                        <a href="{% url 'CRM:index' %}" type="button" class="btn btn-sm btn-primary" >Click to open</a>
+    
+                    </div>
+    
+    
+                </div>
+                </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
+
+            
+
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               <!---div class="info-box-2 bg-cyan hover-zoom-effect">
+                    <div class="icon">
+                        <i class="material-icons">playlist_add_check</i>
+                    </div>
+                    <div class="content">
+                        <div class="text"><span style="font-weight:40; font-size:18px;">C</span>ustomer <span style="font-weight:40; font-size:18px;">R</span>esource  <span style="font-weight:40; font-size:18px;">M</span>anagement <span style="font-weight:40;font-size:15px;">(CRM)</span></div>
+                        <div class="text"><a href="{% url 'CRM:index' %}" style="color: black;font-size: 16px;font-weight: 600;">Click to open</a></div>
+                        <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                    </div>
+                </div>
+               <div class="info-box-2 bg-red hover-zoom-effect">
+                   <div class="icon">
+                       <i class="material-icons">face</i>
+                   </div>
+                   <div class="content">
+                       <div class="text"><span style="font-weight:40;font-size:15px;">H</span>uman <span style="font-weight:40;font-size:15px;">R</span>esource <span style="font-weight:40;font-size:15px;">M</span>anagement<span style="font-weight:40;font-size:15px;">(HRM)</span></div>
+                         <div class="text"><a href="{% url 'hrm:hrm_index' %}" style="color: black;font-size: 16px;font-weight: 600;">Click to open</a></div>
+                       <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                   </div>
+               </div>
+
+               <div class="info-box-2 bg-light-green hover-zoom-effect">
+                   <div class="icon">
+                       <i class="material-icons">attach_money</i>
+                   </div>
+                   <div class="content">
+                       <div class="text"><span style="font-weight:40;font-size:15px;">ACCOUNTS</span></div>
+                         <div class="text"><a href="{% url 'ACCNTS:dashboard' %}" style="color: black;font-size: 16px;font-weight: 600;">Click to open</a></div>
+                       <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                   </div>
+               </div>
+
+               <div class="info-box-2 hover-zoom-effect" style ="background-color:#b36143;">
+                   <div class="icon">
+                       <i class="material-icons fas fa-gavel"></i>
+                   </div>
+                   <div class="content">
+                       <div class="text"><span style="font-weight:40;font-size:15px; color:white;">LEGAL</span></div>
+                       <div class="text"><a href="{% url 'Legal:dashboard' %}" style="color: black;font-size: 16px;font-weight: 600;">Click to open</a></div>
+                       <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                   </div>
+               </div>
+
+
+
+
+
+         <div class="col-lg-4">
+
+            <div class="card">
+
+            <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <---- Avatar --
+                    <a href="#" class="avatar avatar-xl rounded-circle">
+                        <img alt="Image placeholder" src="/static/assets/img/theme/team-2.jpg">
+                        </a>
+                    </div>
+                    <div class="col ml--2">
+                        <h4 class="mb-0">
+                        <a href="#!">John Snow</a>
+                        </h4>
+                        <p class="text-sm text-muted mb-0">Working remoteley</p>
+                        <span class="text-success">●</span>
+                        <small>Active</small>
+                    </div>
+                    <div class="col-auto">
+                    
+                        <a href="{% url 'hrm:hrm_index' %}" type="button" class="btn btn-sm btn-primary" >See details</a>
+    
+                    </div>
+    
+    
+                </div>
+                </div>
+                </div>
+    
+            </div>   
+
+       </div>
+     </div>
+    </div>
+    <div class="row clearfix" style="border-top: 2px solid #f5f5f5; padding:5px;">
+     <div class="col-md-3 pull-right" >
+           <div class="text"><a href="{% url 'accounts:logout'%}" style="color: #00bcd4;font-size: 16px;font-weight: 600;">Logout</a></div>
+     </div>
+
+     <div class="col-md-3" >
+
+         <p></p>
+
+     </div>
+    </div>
+
+    </div>
+{% endblock %}

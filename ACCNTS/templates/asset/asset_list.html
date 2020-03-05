@@ -1,0 +1,56 @@
+{% extends "layout/accnts_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | ASSETS</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                  <span><a class="btn btn-primary" href = "{% url 'ACCNTS:asset_add' %}" >ADD ASSET</a></span>
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>amount</th>
+                                <th>Date</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if assets %}
+                              {% for asset in assets %}
+                                  <tr>
+                                      <td>{{ asset.name }}</td>
+                                      <td>{{ asset.type }}</td>
+                                      <td>{{ asset.amount }}</td>
+                                      <td>{{ asset.dated }}</td>
+                                      <td style="text-align:center;">
+                                          <span> <a href = "{% url 'ACCNTS:asset_detail' pk=asset.id %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:asset_edit' pk=asset.id %}"><i class="material-icons">edit</i></a> </span>
+                                          <span> <a href = "{% url 'ACCNTS:asset_delete' pk=asset.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

@@ -1,0 +1,126 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">HRM | DASHBOARD</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="card">
+    <div class="body">
+        {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
+          <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">BACK</a></span>
+        {% else %}
+        <span><a class="btn btn-primary" href = "{% url 'leave:applyleave_list' %}">BACK</a></span>
+        {% endif %}
+
+        <div class="body">
+            <p style="text-align:center;"> <span class="label bg-orange" style="font-size:17px; border-radius:4px;">{{employee.leave_bal}} </span> &nbsp; Leave Days  </p>
+        </div>
+      <form method="POST">
+        {% csrf_token %}
+          <div class="row clearfix">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.employee.id_for_label }}">Your Username</label> <br>
+                        <input type="text" name="{{ form.employee.name }}" value="{{ current_user }}" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.leave.id_for_label }}">Which Type of Leave</label>
+                        {{ form.leave|add_class:"form-control" }}
+                        <ul>
+                          {% for error in form.leave.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+          </div>
+        <div class="row clearfix">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.first_name.id_for_label }}">Start Date</label>
+                        {{ form.start_date|add_class:"form-control datepicker"}}
+                        <ul>
+                          {% for error in form.start_date.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{ form.end_date.id_for_label }}">End Date(Inclusive)</label>
+                          {{ form.end_date|add_class:"form-control datepicker"  }}
+                          <ul>
+                            {% for error in form.resume_date.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <div class="form-line">
+                          <label for="{{form.resume_date.id_for_label }}">Resume Date(Inclusive)</label>
+                          {{ form.resume_date|add_class:"form-control datepicker"  }}
+                          <ul>
+                            {% for error in form.resume_date.errors%}
+                              <li class="alert alert-danger">{{ error }}</li>
+                            {% endfor %}
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+         <div class="row clearfix">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.home_phone.id_for_label }}">Phone Number</label> <br>
+                        <input type="number" name="{{ form.home_phone.name }}" value="{{ phone_number }}" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="form-line">
+                        <label for="{{ form.person_taking_charge.id_for_label }}">Person Taking In Charge</label>
+                        {{ form.person_taking_charge|add_class:"form-control" }}
+                        <ul>
+                          {% for error in form.person_taking_charge.errors%}
+                            <li class="alert alert-danger">{{ error }}</li>
+                          {% endfor %}
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="row clearfix">
+            <div class="col-md-4 pull-right">
+                <input type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect" value="submit">
+            </div>
+          </div>
+          </form>
+      </div>
+
+
+{% endblock %}

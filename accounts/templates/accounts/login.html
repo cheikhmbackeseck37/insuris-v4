@@ -1,0 +1,45 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+{% block content %}
+  <div class="login-box">
+      <div class="logo">
+          <a href="javascript:void(0);">  <img style=" margin-left: -70px;margin-bottom:10px;" src="{% static 'images/logo.png' %}" width="130" height="80" alt="LOGO" /></a>
+          <small style="font-size: 16px;">INSURIS </small>
+      </div>
+
+      
+      <div class="card">
+          <div class="body">
+              <form id="sign_in" action="{% url 'accounts:login'%}" method="POST">
+                  {% csrf_token %}
+                  <div class="msg">Sign in to start your session</div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">person</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="text" class="form-control" name="username" placeholder="Username or Email address" required autofocus>
+                      </div>
+                  </div>
+                  <div class="input-group">
+                      <span class="input-group-addon">
+                          <i class="material-icons">lock</i>
+                      </span>
+                      <div class="form-line">
+                          <input type="password" class="form-control" name="password" placeholder="Password" required>
+                      </div>
+                  </div>
+                  <div class="row body">
+                      
+                      <div class="col-lg-6 col-7">
+                          <button class="btn btn-sm btn-neutral" type="submit">SIGN IN</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</body>
+
+
+{% endblock %}

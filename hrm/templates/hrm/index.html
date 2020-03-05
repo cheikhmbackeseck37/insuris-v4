@@ -1,0 +1,89 @@
+{% extends "layout/main_layout.html" %}
+{% block header %}
+{% endblock%}
+{% block content %}
+  <div class = "container-fluid mt--6" >
+    <div class="card">
+        <div class="card-header border-0">
+            <div class="row">
+
+                <div class="col-6">
+                    <h3 class="mb-0">HRM | ASSURE</h3>
+                </div>
+
+      
+
+                <div class="col-6 text-right">
+                    {% if employee.position.initials == "HRM" or employee.position.initials == "GM"   or employee.position.initials == "CCM"%}
+
+                    <a href="{% url 'accounts:add_employee'%}" class="btn btn-sm btn-primary btn-round btn-icon" data-toggle="tooltip" data-original-title="Edit product">
+                    <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                    <span class="btn-inner--text">ADD </span>
+                    </a>
+                    {% endif %}
+                </div>
+
+
+
+
+
+            
+                <div class="table-responsive">
+                    
+                    
+                        <table class="table align-items-center table-flush table-striped">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>profil</th>
+                                    
+                                    <th>Huduma No.</th>
+                                    <th>Department</th>
+                                    <th>Job Position</th>
+                                    
+                                    <th>Salary (KSH)</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if users %}
+                                  {% for user in users %}
+                                      <tr>
+                                          <td class="table-user">
+                                            {% if employee.profile_pic %}
+                                            <img class="avatar rounded-circle mr-3" src="{{ employee.profile_pic.url }}">
+                                              {% elif employee.profile_pic == "" %}
+                                              {% endif %}
+                                              <b>{{user.name }}</b>
+
+                                          </td>
+                                          
+                                          <td>{{user.huduma }}</td>
+                                          <td>{{user.position.department.name}}</td>
+                                          <td>{{ user.position }}</td>
+                                         
+                                          <td>{{ user.salary }}</td>
+                                          <td style="text-align: center;">
+                                                {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
+                                                    <span> <a href = "{% url 'accounts:employee_update' user.id %}"><i class="material-icons">edit</i></a> </span>
+                                                    <span> <a href = "{% url 'accounts:employee_delete' user.id %}"><i class="material-icons" style = "color:#cc0000;">delete</i></a> </span>
+                                                    <span> <a href = "{% url 'accounts:profile' pk=user.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                                {% else %}
+                                                <span> <a href="{% url 'accounts:profile' pk=user.pk %}"><i class="material-icons" style="color: #00BCD4;">zoom_in</i></a> </span>
+                                                {% endif %}
+                                          </td>
+                                          
+                                          </td>
+                                      </tr>
+                                  {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

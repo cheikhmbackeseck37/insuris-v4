@@ -1,0 +1,137 @@
+{% extends "layout/main_layout.html" %}
+{% block header %}
+{% endblock%}
+{% block content %}
+<div class="container-fluid mt--6 ">
+  <div class="row card-wrapper ">
+    <div class="card-wrapper ">
+      <div class="card "> 
+
+        <div class="card-header">
+          <h3 class="mb-0">Action buttons</h3>
+          <p class="text-sm mb-0">
+          This is an exmaple of datatable using the well known datatables.net plugin. This is a minimal setup in order to get started fast.
+          </p>
+      </div>
+
+      
+
+     
+          <div class="col-auto">
+              {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
+              <a href="{% url 'accounts:employees' %}" class="btn btn-sm btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
+              {% else %}
+              <a href="{% url 'hrm:hrm_index' %}" class="btn btn-sm btn-primary"><span style="color: orangered;">&larr;</span> BACK</a>
+              {% endif %}
+              {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == "CCM" %}
+                <a href="{% url 'accounts:employee_update' employee.id %}" class="btn btn-sm btn-primary">EDIT</a> 
+              {% endif %}
+          </div>
+          <div class="row body">
+            {% if user_info.profile_pic %}
+            <div class="profile" style="display:flex; justify-content: center; align-items: center; padding: 3rem;">
+              <img src="{{ user_info.profile_pic.url }}" class="profile__img" style="height: 8rem; width: 8rem; border-radius: .4rem;">
+            </div>
+            {% else %}
+              <div class="profile" style=" width: 8rem; height: 8rem; display:flex; justify-content: center; align-items: center; padding: 3rem; background-color: #eee;">
+                <p style ="color:orange; text-align: center;">No profile</p>
+              </div>
+            {% endif %}
+            <div class="col-md-6">
+                <table class="table">
+                    <tr>
+                      <td>Username</td>
+                      <td>{{ user_info.user.username }}</td>
+                    </tr>
+                    <tr>
+                      <td>Email Address</td>
+                      <td>{{ user_info.user.email }}</td>
+                    </tr>
+                    <tr>
+                      <td>First Name</td>
+                      <td>{{ user_info.user.first_name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Last Name</td>
+                      <td>{{ user_info.user.last_name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Address</td>
+                      <td>{{ user_info.address }}</td>
+                    </tr>
+                    <tr>
+                      <td>Phone Number</td>
+                      <td>{{ user_info.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td> National Id</td>
+                        <td>{{user_info.id_no }}</td>
+                    </tr>
+                    <tr>
+                        <td> Employee No</td>
+                        <td>{{user_info.employee_no }}</td>
+                    </tr>
+
+                    <tr>
+                        <td> NHIF NO</td>
+                        <td>{{user_info.nhif_no }}</td>
+                    </tr>
+
+                    <tr>
+                        <td> NSSF NO</td>
+                        <td>{{user_info.nssf_no }}</td>
+                    </tr>
+                    <tr>
+                        <td> KRA PIN</td>
+                        <td>{{user_info.KRA }}</td>
+                    </tr>
+                  </table>
+            </div>
+            <div class="col-md-6">
+
+                <table class="table table-responsive">
+                    <tr>
+                        <td>Huduma Number</td>
+                        <td>{{ user_info.huduma }}</td>
+                    </tr>
+                    <tr>
+                      <td>Country</td>
+                      <td>{{ user_info.county }}</td>
+                    </tr>
+                    <tr>
+                      <td>Current Job Position</td>
+                      <td>{{ user_info.position.name }}</td>
+                    </tr>
+                    <tr>
+                      <td>Department</td>
+                      <td>{{user_info.position.department.name}}</td>
+                    </tr>
+                    <tr>
+                      <td>Dependent/ Emergency Phone</td>
+                      <td>{{ user_info.dependant_contact }}</td>
+                    </tr>
+                    <tr>
+                      <td>Dependent / Emergency Email Address </td>
+                      <td>{{ user_info.kin_email }}</td>
+                    </tr>
+                    <tr>
+                      <td>Salary</td>
+                      <td>{{ user_info.salary }}</td>
+                    </tr>
+                    <tr>
+                      <td>Your Benefits</td>
+                      <td>{{ user_info.company_benifits }}</td>
+                    </tr>
+                    <tr>
+                        <td>Your Leave Balance</td>
+                        <td>{{ user_info.leave_bal }}</td>
+                    </tr>
+                </table>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+{% endblock %}

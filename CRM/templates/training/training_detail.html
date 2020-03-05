@@ -1,0 +1,40 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div  class = "row" style="background: none; box-shadow: none">
+      <h2 class="header pull-left">CRM | TRAINING</h2>
+  </div>
+{% endblock%}
+{% block content %}
+        <div class="card body">
+                <div class="helper_cls body">
+                    <a href="{% url 'CRM:list_training' %}" class="btn btn-primary">BACK</a>
+                    <a href="{% url 'CRM:edit_training' pk=training.pk %}" class="btn btn-success">EDIT</a>
+                </div>
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>Trainer</td>
+                            <td>{{ training.trainer }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of Trainees</td>
+                            <td>{{ training.all_trainee|length }}</td>
+                        </tr>
+                        <tr>
+                            <td>Happened on</td>
+                            <td>{{ training.happened_on }}</td>
+                        </tr>
+                        <tr>
+                            <td>Members Attendees</td>
+                            <td>{{ training.description }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+{% endblock %}

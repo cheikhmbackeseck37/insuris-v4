@@ -1,0 +1,40 @@
+{% extends 'layout/main_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ employee_form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">HRM | DEPARTMENTS</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="card body" >
+      <div class="helper-cls body">
+        <a href="{% url 'departments:list_department' %}" class="btn btn-primary">BACK</a>
+        <a href="{% url 'departments:edit_department' pk=department.pk %}" class="btn btn-success">EDIT</a>
+      </div> <br> <br>
+      <div class="body ">
+        <table class="table table-responsive"> 
+            <tbody>
+                <tr>
+                    <td>Department Name</td>
+                    <td>{{ department.name }}</td>
+                </tr>
+                <tr>
+                    <td>Department Abbrs</td>
+                    <td>{{ department.initials }}</td>
+                </tr>
+                <tr>
+                    <td>Created On </td>
+                    <td>{{ department.created_on }}</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+
+  </div>
+
+{% endblock %}

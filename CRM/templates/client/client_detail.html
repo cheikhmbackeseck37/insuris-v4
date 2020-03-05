@@ -1,0 +1,644 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">CRM | MEMBER DETAILS</h2>
+  </div>
+{% endblock%}
+{% block content %}
+  <div class="card">
+      <div class="body">
+            <div class="helper_cls">
+                <a href="{% url 'CRM:list_client' %}" class="btn btn-primary">BACK</a>
+                {% if employee.position.initials == "HRM" or employee.position.initials == "GM" %}
+                <a href="{% url 'CRM:edit_client' pk=client.pk %}" class="btn btn-success">EDIT</a>
+                {% endif %}
+                <a href="{% url 'CRM:notes' pk=client.pk %}" class="label btn bg-orange">ADD NOTE</a>
+            </div>
+        <div class="row clearfix">
+            <div class="col-md-6">
+                <table class="table table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>{{ client.company_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone</td>
+                            <td>{{ client.company_phone }} or ( {{ client.company_phone_alt }} )</td>
+                        </tr>
+
+                        <tr>
+                            <td>Location</td>
+                            <td>{{ client.physical_location }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>Post Address</td>
+                            <td>{{ client.post_address }}</td>
+                        </tr>
+                        <tr>
+                            <td>Director</td>
+                            <td>{{ client.director_info}}</td>
+                        </tr>
+                        <tr>
+                            <td>Category</td>
+                            <td>{{ client.category }}</td>
+                        </tr>
+                        <tr>
+                            <td>Sector</td>
+                            <td>{{ client.sector }}</td>
+                        </tr>
+                        <tr>
+                            <td>Business Nature</td>
+                            <td>{{ client.nature_of_business  }}</td>
+                        </tr>
+                        <tr>
+                            <td>Date of Issue</td>
+                            <td>{{ client.date_of_issue  }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                    <table class="table table-responsive">
+                            <tbody>
+                                <tr>
+                                    <td>Cerficate of Id</td>
+                                    <td>
+                                    {% if client.copy_of_id %} 
+                                        <a href="{{client.copy_of_id.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a>
+                                    {% elif client.copy_of_id == "" %}
+                                    <td>Record Not provided</td>
+                                    {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Certificate of in Corporation</td>
+                                    <td> {% if client.certificate_of_incorporation %}
+                                        <a href="{{client.certificate_of_incorporation.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.certificate_of_incorporation == "" %}
+                                            <td>Record Not provided</td>
+                                        {% endif %}
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>Company Certificate Pin</td>
+                                    <td> 
+                                        {% if client.company_certificate_pin %}
+                                        <a href="{{client.company_certificate_pin.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a>
+                                        {% elif client.company_certificate_pin  == "" %}
+                                            <td>Record Not provided</td>
+                                        {% endif %} 
+                                    </td>
+                                        
+                                </tr>
+                                <tr>
+                                    <td>Copy of blank Cheque</td>
+                                    <td>
+                                        {% if  client.copy_of_blank_cheque %} 
+                                        <a href="{{client.copy_of_blank_cheque.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.copy_of_blank_cheque == "" %}
+                                        <td>Record not provided </td>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Copy of KEBS Certificate</td>
+                                    <td>
+                                        {% if client.copy_of_kebs_certicate %} 
+                                        <a href="{{client.copy_of_kebs_certicate.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.copy_of_kebs_certicate == "" %}
+                                            <td>Record not provided </td>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Director Pin Number</td>
+                                    <td> 
+                                        {% if client.director_pin_number %}
+                                        <a href="{{client.director_pin_number.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.director_pin_number == "" %}
+                                            <td>Record not provided</td>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>List of product Barcoded</td>
+                                    <td>
+                                        {% if client.list_of_product_barcoded %} 
+                                        <a href="{{client.list_of_product_barcoded.url }}" target="_blank"><i class="material-icons" style = "color:#cc0000;">assignment_returned</i> </a> 
+                                        {% elif client.list_of_product_barcoded == "" %}
+                                            <td>Record not provided</td>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+            </div>
+            <div class="col-md-12">
+                    {% if employee.position.initials == "ME1" or employee.position.initials == 'ME2' or employee.position.initials == 'ME3' %}
+                    <div class="col-md-2">
+                        {% if client.is_me1 == 0 %}
+                        <span > <a href="{% url 'CRM:me' client.id %}" class="label btn bg-orange" > approve </a></span>
+                        {% else %}
+                            <span>
+                                <span class="btn label bg-green"> ME approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2">
+                        {% if client.is_ccm == 0%}
+                            <span class="btn label bg-orange"> CCM pending...</span>
+                        {% else %}
+                            <span>
+                                <span class="btn label bg-green"> CCM approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2">
+                        {% if client.is_accm == 0%}
+                            <span class="btn label bg-orange"> ACCM pending...</span>
+                        {% else %}
+                            <span>
+                                <span class="btn label bg-green"> ACCM approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2">
+                        {% if client.is_tm == 0%}
+                            <span class="btn label bg-orange"> TM pending...</span>
+                        {% else %}
+                            <span>
+                                <span class="btn label bg-green"> TM approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2">
+                        {% if client.is_cacc == 0%}
+                            <span class="btn label bg-orange"> ACC.Ex pending</span>
+                        {% else %}
+                            <span>
+                                <span class="btn label bg-green"> ACC.Ex approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-2">
+                        {% if client.is_gm == 0%}
+                            <span class="btn label bg-orange"> GM pending...</span>
+                        {% else %}
+                            <span>
+                                <span class="btn label bg-green"> GM approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                        {% endif %}
+                    </div>
+
+
+            {% elif employee.position.initials == "CCM" %}
+               <div class="col-md-2">
+                    {% if client.is_me1 == 0%}
+                        <span class="btn label bg-orange"> ME pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> CCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+               </div>
+               <div class="col-md-1">
+                   {% if client.category == 0 %}
+                   <span><a href="{% url 'CRM:add_category' pk=client.pk %}" class="btn label bg-blue">Category</a></span>
+                   {% else %}
+                   {% if client.is_ccm == 0 %}
+                   <span><a href="{% url 'CRM:ccm'  client.id %}" class="label btn bg-orange" > approve </a></span>
+                   {% else %}
+                        <span>
+                            <span class="btn label bg-green">approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                   {% endif %}
+                   {% endif %}
+               </div>
+                <div class="col-md-2">
+                    {% if client.is_accm == 0%}
+                        <span class="btn label bg-orange"> ACCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_tm == 0%}
+                        <span class="btn label bg-orange"> TM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> TM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_cacc == 0%}
+                        <span class="btn label bg-orange"> ACC.Ex pending</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACC.Ex approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_gm == 0%}
+                        <span class="btn label bg-orange"> GM pending...</span>
+                    {% else %}
+                        <span>
+                                <span class="btn label bg-green"> GM approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+            {% elif employee.position.initials == "CACC" %}
+                <div class="col-md-2">
+                    {% if client.is_me1 == 0%}
+                        <span class="btn label bg-orange"> ME pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> CCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_ccm == 0%}
+                        <span class="btn label bg-orange"> CCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> CCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_accm == 0%}
+                        <span class="btn label bg-orange"> ACCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_tm == 0%}
+                        <span class="btn label bg-orange"> TM pending...</span>
+                    {% else %}
+                        <span>
+                                <span class="btn label bg-green"> TM approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_cacc == 0 %}
+                        <span> <a href="{% url 'CRM:cacc' client.id %}" class="label btn bg-orange" > ACC.Ex approve </a></span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACC.Ex approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                {% if client.is_gm == 0%}
+                    <span class="btn label bg-orange"> GM pending...</span>
+                {% else %}
+                    <span>
+                        <span class="btn label bg-green"> GM approved</span>
+                        <span class="label bg-blue"> BY Who</span>
+                    </span>
+                {% endif %}
+                </div>
+            {% elif employee.position.initials == "ACCM" %}
+                <div class="col-md-2">
+                    {% if client.is_me1 == 0%}
+                        <span class="btn label bg-orange"> ME pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> CCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_ccm == 0%}
+                        <span class="btn label bg-orange"> CCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> CCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_accm == 0 %}
+                        <span> <a href="{% url 'CRM:accm' client.id %}" class="label btn bg-orange" > approve </a></span>
+                    {% else %}
+                        <span class="btn label bg-green">approved</span>
+                        <span>
+                            <span class="btn label bg-green"> ACCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_tm == 0%}
+                        <span class="btn label bg-orange"> TM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> TM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_cacc == 0%}
+                        <span class="btn label bg-orange"> ACC.Ex pending</span>
+                    {% else %}
+                        <span>
+                                <span class="btn label bg-green"> ACC.Ex approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                {% if client.is_gm == 0%}
+                    <span class="btn label bg-orange"> GM pending...</span>
+                {% else %}
+                    <span>
+                        <span class="btn label bg-green"> GM approved</span>
+                        <span class="label bg-blue"> BY Who</span>
+                    </span>
+                {% endif %}
+                </div>
+            {% elif employee.position.initials == "TM" %}
+                <div class="col-md-2">
+                    {% if client.is_me1 == 0%}
+                        <span class="btn label bg-orange"> ME pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ME approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_ccm == 0%}
+                        <span class="btn label bg-orange"> CCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> CCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_accm == 0%}
+                        <span class="btn label bg-orange"> ACCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.member_number == "0" or client.member_prefix == "0" %}
+                    <span><a href="{% url 'CRM:assign' pk=client.pk %}" class="btn label bg-blue">Assign Member </a></span>
+                    {% else %}
+                        {% if client.is_tm == 0 %}
+                            <span><a href="{% url 'CRM:tm'  client.id %}" class="label btn bg-orange" > approve </a></span>
+                        {% else %}
+                            <span>
+                                <span class="btn label bg-green">approved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+                <div class="col-md-2">
+                        {% if client.is_cacc == 0%}
+                            <span class="btn label bg-orange"> ACC.Ex pending</span>
+                        {% else %}
+                            <span>
+                                <span class="btn label bg-green"> ACC.Exapproved</span>
+                                <span class="label bg-blue"> BY Who</span>
+                            </span>
+                        {% endif %}
+                    </div>
+                <div class="col-md-2">
+                    {% if client.is_gm == 0%}
+                        <span class="btn label bg-orange"> GM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> GM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+            {% elif employee.position.initials == "GM" %}
+                <div class="col-md-2">
+                    {% if client.is_me1 == 0%}
+                        <span class="btn label bg-orange"> ME pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ME approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_ccm == 0%}
+                        <span class="btn label bg-orange"> CCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> CCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_accm == 0%}
+                        <span class="btn label bg-orange"> ACCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_tm == 0%}
+                        <span class="btn label bg-orange"> TM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> TM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_cacc == 0%}
+                        <span class="btn label bg-orange"> ACC.Ex pending</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACC.Ex approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_gm == 0 %}
+                        <span> <a href="{% url 'CRM:gm'  client.id %}" class="label btn bg-orange" > approve </a></span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green">GM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+
+            {% else %}
+            <div class="col-md-2">
+                    {% if client.is_me1 == 0%}
+                        <span class="btn label bg-orange"> ME pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ME approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_ccm == 0%}
+                        <span class="btn label bg-orange"> CCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> CCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_accm == 0%}
+                        <span class="btn label bg-orange"> ACCM pending...</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACCM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_tm == 0%}
+                        <span class="btn label bg-orange"> TM pending...</span>
+                    {% else %}                        
+                        <span>
+                            <span class="btn label bg-green"> TM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_cacc == 0%}
+                        <span class="btn label bg-orange"> ACC.Ex pending</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> ACC.Ex approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    {% if client.is_gm == 0 %}
+                        <span class="btn label bg-orange">GM pending</span>
+                    {% else %}
+                        <span>
+                            <span class="btn label bg-green"> GM approved</span>
+                            <span class="label bg-blue"> BY Who</span>
+                        </span>
+                    {% endif %}
+                </div>
+            {% endif %}
+      </div>
+      <hr/>
+      <div class="row clearfix body">
+        <div class="col-md-6 col-lg-6">
+            <div class="table-responsive">
+                 <h3 style="text-align: center;">Notes for Members</h3>
+            <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                <thead>
+                    <th>Member</th>
+                    <th>Employee</th>
+                    <th>Notes</th>
+                </thead>
+                <tbody>
+                    {% for note in notes %}
+                        <tr>
+                            <td>{{note.member.company_name}}</td>
+                            <td>{{note.current_user}}</td>
+                            <td>{{note.notes}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+            <div class="table-responsive">
+                <h3 style="text-align: center;">Staff Approvals</h3>
+                <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                    <thead>
+                        <th>Member</th>
+                        <th>Employee</th>
+                        <th>Approved On </th>
+                    </thead>
+                    <tbody>
+                        {% for app in approved %}
+                            <tr>
+                                <td>{{app.member.company_name}}</td>
+                                <td>{{app.current_user}} &nbsp; {{app.current_user.user.lastname}}</td>
+                                <td>{{app.dated}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+     <!--    <marquee scrolldelay= 180>
+            {% for note in notes %}
+            <span class="label bg-blue" style="border-radius: 20px;">{{note.current_user.position}}&nbsp; &nbsp;</span> &nbsp; to  <i class="label bg-red" style="border-radius: 18px;">{{note.member.company_name}}</i>&nbsp; <b style="font-size: 16px;">~</b>&nbsp;<span>{{note.notes|lower}} </span>
+            {% endfor %}
+        </marquee> -->
+      </div>
+            </div>
+        </div>
+      </div>
+
+
+  </div>
+
+{% endblock %}

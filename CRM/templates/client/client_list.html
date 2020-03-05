@@ -1,0 +1,166 @@
+{% extends "layout/crm_layout.html" %}
+{% block header %}
+
+{% endblock%}
+{% block content %}
+<div class="header pb-6">
+
+      
+
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 d-inline-block mb-0">CRM | MEMBERS</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="{% url  'CRM:index' %}">Dashboards</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Alternative</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a href="{% url 'CRM:create_client' %}" class="btn btn-sm btn-neutral">New</a>
+            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+
+<div class = "container-fluid mt--6" >
+
+    <div class="card">
+        <!-- Card header -->
+        <div class="card-header border-0">
+            <div class="row">
+            <div class="col-6">
+                <h3 class="mb-0">TABLE ASSURE</h3>
+            </div>
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+            <div class="col-6 text-right">
+                <a href="{% url 'CRM:create_client' %}" type="button"  class="btn btn-sm btn-neutral btn-round btn-icon"  data-original-title="Edit product">
+                <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+                <span class="btn-inner--text">Export</span>
+                </a>
+            </div>
+            
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+        <!-- Light table -->
+        <div class="table-responsive">
+            <table class="table align-items-center table-flush table-striped " >
+            
+            <thead class="thead-light">
+                <tr>
+                <th scope="col" class="sort" data-sort="name">Prenom</th>
+                <th scope="col" class="sort" data-sort="name">Nom</th>
+                
+                <th scope="col" class="sort" data-sort="name">Email</th>
+                
+                <th scope="col" class="sort" data-sort="name">Pays</th>
+                
+                <th scope="col" class="sort" data-sort="name">Sexe</th>
+                
+                <th scope="col" class="sort" data-sort="name">Matricule</th>
+
+                
+                
+                <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if clients %}
+                {% for client in clients %}
+                <tr>
+                <td class="table-user">
+                    {% if client.photo %}
+                    <img class="avatar rounded-circle mr-3" src="{{ client.photo.url }}">
+                    {% elif client.photo == "" %}
+                    {% endif %}
+                      <b>{{ client.Prenom }}</b>
+                </td>
+                <td>
+                    <span class="text-muted">{{ client.Nom }}</span>
+                </td>
+                <td>
+                    <a href="#!" class="font-weight-bold">{{ client.Email }}</a>
+                </td>
+                <td>
+                    <span class="text-muted">{{ client.pays }}</span>
+                </td>
+                <td>
+                    <span class="text-muted">{{ client.Sexe }}</span>
+                </td>
+
+                <td>
+                    <span class="text-muted">{{ client.Matricule }}</span>
+                </td>
+                <td class="table-actions">
+                    {% if employee.position.initials == "HRM" or employee.position.initials == "GM" or employee.position.initials == 'ME1' or employee.position.initials == 'ME2' or employee.position.initials == 'ME3' %}
+                    <a href="{% url 'CRM:edit_client' pk=client.pk %}" class="table-action" data-toggle="tooltip" data-original-title="Edit product">
+                    <i class="fas fa-user-edit"></i>
+                    </a>
+                    <a href="{% url 'CRM:delete_client' pk=client.pk%}" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete product">
+                    <i class="fas fa-trash"></i>
+                    </a>
+                    <a href="{% url 'CRM:detail_client' pk=client.pk %}" class="table-action" data-toggle="tooltip" data-original-title="Delete product">
+                        <i class="ni ni-zoom-split-in"></i>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'CRM:detail_client' pk=client.pk %}" class="table-action" data-toggle="tooltip" data-original-title="Delete product">
+                        <i class="ni ni-zoom-split-in"></i>
+                    </a>                    
+                    {% endif %}
+                
+                </td>
+
+                </tr>
+                <tr>
+               
+               
+                
+
+                {% endfor %}
+                {% else %}
+
+                {% endif %}
+            </tbody>
+            </table>
+        </div>
+        </div>
+
+
+
+
+
+</div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}

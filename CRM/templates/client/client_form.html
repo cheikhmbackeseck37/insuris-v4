@@ -1,0 +1,439 @@
+{% extends 'layout/crm_layout.html' %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}       {# import bootstrap4/bootstrap3 #}
+{% bootstrap_css %}         {# Embed Bootstrap CSS #}
+{% bootstrap_javascript jquery='full' %}  {# Embed Bootstrap JS+jQuery #}
+{{ form.media }}            {# Adds date-picker required JS and CSS #}
+{% block header %}
+<div class="header pb-6">
+  
+
+    <div class="container-fluid">
+      <div class="header-body">
+        <div class="row align-items-center py-4">
+          <div class="col-lg-6 col-7">
+            <h6 class="h2 d-inline-block mb-0">CRM | ADD</h6>
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+              <ol class="breadcrumb breadcrumb-links">
+                <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="{% url  'CRM:index' %}">Dashboards</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Alternative</li>
+              </ol>
+            </nav>
+          </div>
+          <div class="col-lg-6 col-5 text-right">
+            <a href="{% url 'CRM:list_client' %}" class="btn btn-sm btn-neutral">BACK</a>
+            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+{% endblock%}
+{% block content %}
+
+    <section>
+        <div class = "container-fluid mt--6" >
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h3 class="mb-0">ONGLET AJOUT ASSURE</h3>
+                        <div class="bootstrap-tagsinput"><span class="tag badge badge-primary">#hastag<span data-role="remove"></span></span> <span class="tag badge badge-primary">#Insuris<span data-role="remove"></span></span> <span class="tag badge badge-primary">#Assure<span data-role="remove"></span></span> <span class="tag badge badge-primary"> #Admin<span data-role="remove"></span></span> <span class="tag badge badge-primary"> #test<span data-role="remove"></span></span> <input type="text" placeholder=""><div></div></div>
+                    </div>
+                    
+                    <div class="card-body">
+                        
+                        <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
+                        <div class="timeline-block">
+                            <span class="timeline-step badge-success">
+                            <i class="ni ni-bell-55"></i>
+                            </span>
+                            <div class="timeline-content">
+                                <small class="text-muted font-weight-bold">10:30 AM</small>
+                            <h5 class=" mt-3 mb-0"></h5>
+                                <div class="row">
+                                    <form  method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                    <div class="row ">
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                               <div class="form-line">
+                                                    {{ form.company_name | add_class:"form-control"}}
+                                                    <label class="form-label">USERNAME</label>
+                                                     <ul>
+                                                        {% for error in form.company_name.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                        </div>
+                                    </div>
+                                        
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.Prenom | add_class:"form-control"}}
+                                                    <label class="form-label">PRENOM</label>
+                                                     <ul>
+                                                        {% for error in form.Prenom.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.Nom | add_class:"form-control"}}
+                                                    <label class="form-label">NOM</label>
+                                                     <ul>
+                                                        {% for error in form.Nom.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.Sexe | add_class:"form-control"}}
+                                                    <label class="form-label">SEXE</label>
+                                                     <ul>
+                                                        {% for error in form.Sexe.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.photo | add_class:"form-control"}}
+                                                    <label class="form-label">image</label>
+                                                     <ul>
+                                                        {% for error in form.photo.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.Email | add_class:"form-control"}}
+                                                    <label class="form-label">Adresse email</label>
+                                                     <ul>
+                                                        {% for error in form.Email.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.tel_f | add_class:"form-control"}}
+                                                    <label class="form-label">telephone f</label>
+                                                     <ul>
+                                                        {% for error in form.tel_f.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.tel_p | add_class:"form-control"}}
+                                                    <label class="form-label">telephone p</label>
+                                                     <ul>
+                                                        {% for error in form.tel_p.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.pays | add_class:"form-control"}}
+                                                    <label class="form-label">PAYS</label>
+                                                     <ul>
+                                                        {% for error in form.pays.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.Nationality | add_class:"form-control"}}
+                                                    <label class="form-label">Nationnalite</label>
+                                                     <ul>
+                                                        {% for error in form.Nationality.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.archive | add_class:"form-control"}}
+                                                    <label class="form-label">IS ARCHIVES</label>
+                                                     <ul>
+                                                        {% for error in form.archive.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group form-float">
+                                                <div class="form-line">
+                                                    {{ form.Matricule | add_class:"form-control"}}
+                                                    <label class="form-label">MATRICULE</label>
+                                                     <ul>
+                                                        {% for error in form.Matricule.errors%}
+                                                        <li class="alert alert-danger">{{ error }}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                         
+                                        
+                                         
+                                        
+                                        
+                                         
+                                        
+                                         <div class="col-md-6">
+                                            <div class="form-group ">
+                                                <div class="form-line" >
+                                                  <label>Choose date of issues</label>
+                                                  <input type="date" class="form-control" name="{{form.date_of_issue.name}}">
+                                                    {% for errror in form.date_of_issue.errors %}
+                                                        <li class = "alert alert-danger"> {{ error }}</li>
+                                                    {% endfor %}
+                                            </div>
+                                            </div>
+                                        </div>
+                                    
+                                        
+                                 
+                               
+                                
+                                        
+                        </div>
+
+                            <div class="mt-3">
+                                <span class="badge badge-pill badge-success">#INSURIS</span>
+                                <span class="badge badge-pill badge-success">#Test</span>
+                                <span class="badge badge-pill badge-success">creative</span>
+                            </div>
+
+                            <div class="mt-3">
+                                <input type="submit" class="btn btn-sm btn-primary" value = "SUBMIT">
+                        </div>
+                        <br>   
+                           
+                            </form>
+
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-block">
+                            <span class="timeline-step badge-info">
+                            <i class="ni ni-like-2"></i>
+                            </span>
+                            <div class="timeline-content">
+                            <small class="text-muted font-weight-bold">10:30 AM</small>
+                            
+                            <h5 class=" mt-3 mb-0"></h5>
+                            
+                                </div>                            <div class="mt-3">
+                                <span class="badge badge-pill badge-info">#insuris</span>
+                                
+                            </div>
+                            </div>
+                        
+
+                             
+                        
+                          
+                        </div>
+                        
+                        
+                        </div>
+                        
+                    </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+              
+               
+
+
+
+
+                 <!-- darkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk -->
+                
+                
+                
+                <div class="col-lg-6">
+                    <div class="card bg-gradient-default shadow">
+                    <div class="card-header bg-transparent">
+                        <h3 class="mb-0 text-white">Dark timeline</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline timeline-one-side" data-timeline-content="axis" data-timeline-axis-style="dashed">
+                        <div class="timeline-block">
+                            <span class="timeline-step badge-success">
+                            <i class="ni ni-bell-55"></i>
+                            </span>
+                            <div class="timeline-content">
+                            <small class="text-light font-weight-bold">10:30 AM</small>
+                            <h5 class="text-white mt-3 mb-0">New message</h5>
+                            <p class="text-light text-sm mt-1 mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                            <div class="mt-3">
+                                <span class="badge badge-pill badge-success">design</span>
+                                <span class="badge badge-pill badge-success">system</span>
+                                <span class="badge badge-pill badge-success">creative</span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="timeline-block">
+                            <span class="timeline-step badge-danger">
+                            <i class="ni ni-html5"></i>
+                            </span>
+                            <div class="timeline-content">
+                            <small class="text-light font-weight-bold">10:30 AM</small>
+                            <h5 class="text-white mt-3 mb-0">Product issue</h5>
+                            <p class="text-light text-sm mt-1 mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                            <div class="mt-3">
+                                <span class="badge badge-pill badge-danger">design</span>
+                                <span class="badge badge-pill badge-danger">system</span>
+                                <span class="badge badge-pill badge-danger">creative</span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="timeline-block">
+                            <span class="timeline-step badge-info">
+                            <i class="ni ni-like-2"></i>
+                            </span>
+                            <div class="timeline-content">
+                            <small class="text-light font-weight-bold">10:30 AM</small>
+                            <h5 class="text-white mt-3 mb-0">New likes</h5>
+                            <p class="text-light text-sm mt-1 mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                            <div class="mt-3">
+                                <span class="badge badge-pill badge-info">design</span>
+                                <span class="badge badge-pill badge-info">system</span>
+                                <span class="badge badge-pill badge-info">creative</span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="timeline-block">
+                            <span class="timeline-step badge-success">
+                            <i class="ni ni-bell-55"></i>
+                            </span>
+                            <div class="timeline-content">
+                            <small class="text-light font-weight-bold">10:30 AM</small>
+                            <h5 class="text-white mt-3 mb-0">New message</h5>
+                            <p class="text-light text-sm mt-1 mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                            <div class="mt-3">
+                                <span class="badge badge-pill badge-success">design</span>
+                                <span class="badge badge-pill badge-success">system</span>
+                                <span class="badge badge-pill badge-success">creative</span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="timeline-block">
+                            <span class="timeline-step badge-danger">
+                            <i class="ni ni-html5"></i>
+                            </span>
+                            <div class="timeline-content">
+                            <small class="text-light font-weight-bold">10:30 AM</small>
+                            <h5 class="text-white mt-3 mb-0">Product issue</h5>
+                            <p class="text-light text-sm mt-1 mb-0">Nullam id dolor id nibh ultricies vehicula ut id elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                            <div class="mt-3">
+                                <span class="badge badge-pill badge-danger">design</span>
+                                <span class="badge badge-pill badge-danger">system</span>
+                                <span class="badge badge-pill badge-danger">creative</span>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+                             <!-- darkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk -->
+
+
+
+
+        <div class = "row" >
+        <div class = "col" >
+        <div class = "card-wrapper" >
+        <div class = "card" >
+            <div class="card-header">
+                <h3 class="mb-0">Custom styles</h3>
+                
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-8">
+                    <p class="mb-0">
+                        For custom form validation messages, you’ll need to add the novalidate boolean attribute to your <code>&lt;form&gt;</code>.
+                       
+                    </p>
+                    </div>
+                    
+
+                <hr>
+                
+                    
+                        
+                            <!-- Nav tabs -->
+                            
+
+                            <!-- Tab panes -->
+                            
+                               
+                            </div>
+                        </div>
+                    
+                
+            </div>
+            <!-- #END# Tabs With Icon Title -->
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout/accnts_layout.html" %}
+{% block header %}
+  <div class = "row" style="background: none; box-shadow: none; margin-left: 1.2rem;">
+      <h2 class="header pull-left">ACCOUNTS | PAYSLIP</h2>
+  </div>
+{% endblock%}
+{% block content %}
+<div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card body">
+            <div class="">
+                <h2 class="body">
+                </h2>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>lunch</th>
+                                <th>Date</th>
+                                <th style="text-align:center;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if payslip %}
+                              {% for payslip in payslip %}
+                                  <tr>
+                                      <td>{{ payslip.employee.user.first_name }} &nbsp; {{ payroll.employee.user.last_name }}</td>
+                                      <td>ksh.{{ payslip.lunch }}</td>
+                                      <td>{{ payslip.month }}</td>
+                                      <td>
+                                          <span> <a href = "{% url 'ACCNTS:detail_payroll' pk=payslip.id %}" class="btn label bg-orange">print</a> </span>
+                                      </td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# Exportable Table -->
+
+{% endblock %}
